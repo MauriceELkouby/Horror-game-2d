@@ -61,10 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainCamara.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerProjectile.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerController1.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PatrolEnemy.cs" />
     <Compile Include="Assets\Scripts\ShooterEnemy.cs" />
     <Compile Include="Assets\Scripts\MeleeEnemey.cs" />
+    <Compile Include="Assets\EnemyBehavior.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>

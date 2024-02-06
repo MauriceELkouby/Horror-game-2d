@@ -23,8 +23,6 @@ public class PatrolEnemy : MonoBehaviour
                 once = true;
                 StartCoroutine(Wait());
             }
-           
-
         }
 
         
