@@ -7,38 +7,42 @@ public class FollowPlayer : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private Transform target;
-    [SerializeField] private float minimumDistance;
-    [SerializeField] private float distance;
+
+    [SerializeField] private float minimumDistance; 
+    private float distance;
+    public float distance_t;
 
     public Transform[] patrolPoints;
     public float waitTime;
-    private int currentPointIndex = 0;
+    private int currentPointIndex;
     bool once;
 
     [SerializeField] private GameObject porjectile;
     [SerializeField] private float timeBetweeenShots;
     private float nextShotTime;
 
-    
 
     // Update is called once per frame
     void Update()
     {
         // Update is called once per frame
 
-        if (target.position.x > distance || target.position.y > distance)
+        distance = Vector3.Distance(transform.position, target.position);
+
+        if (distance < minimumDistance)
         {
-            Patrol();
+            Follow();
         }
         else
         {
-            Follow();
+            //transform.position = Vector2.MoveTowards(transform.position, patrolPoints[currentPointIndex].position, speed * Time.deltaTime);
+            Patrol();
         }
     }
     
     void Follow()
     {
-        if (Vector2.Distance(transform.position, target.position) > minimumDistance)
+        if (Vector2.Distance(transform.position, target.position) > distance_t)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         }
@@ -50,17 +54,43 @@ public class FollowPlayer : MonoBehaviour
 
     void Patrol()
     {
-        if (Vector2.Distance(patrolPoints[currentPointIndex].transform.position, transform.position) < .1f)
+        if (transform.position != patrolPoints[currentPointIndex].position)
         {
-            currentPointIndex++;
-            if (currentPointIndex >= patrolPoints.Length)
+            transform.position = Vector2.MoveTowards(transform.position, patrolPoints[currentPointIndex].position, speed * Time.deltaTime);
+            Debug.Log("First Patrol");
+            Debug.Log(currentPointIndex);
+            Debug.Log(patrolPoints.Length);
+        }
+        else
+        {
+            
+            Debug.Log(currentPointIndex);
+            if (currentPointIndex + 1 == patrolPoints.Length)
             {
                 currentPointIndex = 0;
             }
+            else
+            {
+                currentPointIndex++;
+            }
         }
-        transform.position = Vector2.MoveTowards(transform.position, patrolPoints[currentPointIndex].transform.position, Time.deltaTime * speed);
-
+       
     }
+    /*IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        if (currentPointIndex + 1 < patrolPoints.Length)
+        {
+            currentPointIndex++;
+        }
+        else
+        {
+            currentPointIndex = 0;
+        }
+        once = false;
+
+    }*/
 }
 
 

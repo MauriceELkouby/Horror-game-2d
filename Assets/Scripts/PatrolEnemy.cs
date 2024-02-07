@@ -18,7 +18,7 @@ public class PatrolEnemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, patrolPoints[currentPointIndex].position, speed * Time.deltaTime);
         } else
         {
-            if (once == true)
+            if (once == false)
             {
                 once = true;
                 StartCoroutine(Wait());
