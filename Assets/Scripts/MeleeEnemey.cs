@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class FollowPlayer : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class FollowPlayer : MonoBehaviour
     public float waitTime;
     private int currentPointIndex;
     bool once;
+   //public AIPath pathfinder;
 
     [SerializeField] private GameObject porjectile;
     [SerializeField] private float timeBetweeenShots;
@@ -26,19 +28,23 @@ public class FollowPlayer : MonoBehaviour
     void Update()
     {
         // Update is called once per frame
-
+        //pathfinder.target = null;
         distance = Vector3.Distance(transform.position, target.position);
 
         if (distance < minimumDistance)
         {
             Follow();
+            
         }
         else
         {
+            //pathfinder.enabled = false;
             //transform.position = Vector2.MoveTowards(transform.position, patrolPoints[currentPointIndex].position, speed * Time.deltaTime);
             Patrol();
         }
     }
+
+
     
     void Follow()
     {
